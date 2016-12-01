@@ -1,17 +1,10 @@
 class cnsnpuppet {
-windowsfeature { 'NET-Framework-Core':
+$iis_features = ['NET-Framework-Core','Web-Server','Web-WebServer','Web-Asp-Net45','Web-ISAPI-Ext','Web-ISAPI-Filter','NET-Framework-45-ASPNET','WAS-NET-Environment','Web-Http-Redirect','Web-Filtering','Web-Mgmt-Console','Web-Mgmt-Tools']
+
+windowsfeature { $iis_features:
   ensure => present,
 }
 
-windowsfeature { 'NET-Framework-45-ASPNET':
-ensure => present,
-}
-
-windowsfeature { 'Web-WebServer':
-  ensure             => present,
-  installsubfeatures => true,
-  require            => [ WINDOWSFEATURE['NET-Framework-45-ASPNET'], WINDOWSFEATURE['NET-Framework-Core']]
-}
 #
 #sslcertificate { 'Install-PFX-Certificate' :
 #  name       => 'mycert.pfx',
@@ -21,7 +14,7 @@ windowsfeature { 'Web-WebServer':
 #}
 
 exec { 'install-certificate':
-  command  => '$($pass = "password123" | ConvertTo-SecureString -AsPlainText -Force;Import-PfxCertificate -Password password123 -FilePath C:\mycert.pfx)',
+  command  => '$($pass = "password123" | ConvertTo-SecureString -AsPlainText -Force;Import-PfxCertificate –FilePath C:\mycert.pfx cert:\localMachine\my -Password $pass)',
   provider => powershell,
 }
 

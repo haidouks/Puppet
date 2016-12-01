@@ -10,8 +10,8 @@
   "dependencies": [
     {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
 	{"name":"puppetlabs-powershell","version_requirement":">=2.1.0"},
-	{"name":"puppetlabs-iis","version_requirement":">=2.0.2"},
-	{"name":"puppetlabs-windowsfeature","version_requirement":">=2.0.0"}
+	{"name":"puppet-iis","version_requirement":">=2.0.2"},
+	{"name":"puppet-windowsfeature","version_requirement":">=2.0.0"}
   ],
   "data_provider": null
 }
